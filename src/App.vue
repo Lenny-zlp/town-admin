@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>小镇后台</h1>
     <router-view/>
   </div>
 </template>
