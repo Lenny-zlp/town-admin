@@ -4,10 +4,16 @@
         width="200px"
         class="aside"
         >
-          <Aside />
+          <Aside @handChange="geturl" />
         </el-aside>
         <el-container>
-            <el-header class="header">Header</el-header>
+            <el-header class="header">
+              <div class="h_left" v-for="item in menulist" :key="item.id">
+                  <span class="line"></span>
+                  <span class="foo">{{item.parentName}}</span> - <span class="soo">{{item.name}}</span>
+              </div>
+              <div class="h_right" @click="Onback">返回列表</div>
+            </el-header>
             <el-main class="main">
                 <router-view />
             </el-main>
@@ -24,13 +30,32 @@ export default {
   },
   props: {},
   data () {
-    return {}
+    return {
+      menulist: [
+        {
+          id: '1-1',
+          name: '店铺管理',
+          parentName: '店铺管理',
+          path: '/storeManage'
+        }
+      ]
+    }
   },
   computed: {},
   watch: {},
-  created () {},
+  created () {
+    console.log(this.menulist)
+  },
   mounted () {},
-  methods: {}
+  methods: {
+    Onback () {
+      console.log('返回列表')
+    },
+    geturl (menulist) {
+      this.menulist = menulist
+      // console.log('menulist', menulist)
+    }
+  }
 }
 </script>
 
@@ -43,10 +68,33 @@ export default {
         bottom: 0;
     }
     .aside {
-        background-color: #323232;
+      margin-right: 5px;
+      background-color: #323232;
     }
     .header {
-        background-color: #ccc;
+        height: 46px!important;
+        font-size: 14px;
+        background-color: #323232;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+        padding: 0 40px 0 20px;
+        .h_left {
+            display: flex;
+            .line {
+                width: 4px;
+                height: 20px;
+                background-color: #0099cd;
+                margin-right: 10px;
+            }
+        }
+        .h_right {
+            background-color: #0099cd;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     }
     .main {
         background-color: #eee;

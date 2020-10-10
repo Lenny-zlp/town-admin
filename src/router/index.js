@@ -68,8 +68,6 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const user = JSON.parse(window.localStorage.getItem('user'))
-  console.log(to)
-  console.log(from)
   if (to.path !== '/login') {
     if (user) {
       next()
